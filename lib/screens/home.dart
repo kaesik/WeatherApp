@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:weather_app/widgets/main_tile.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -10,15 +11,37 @@ class HomeScreen extends StatelessWidget {
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.background,
+        title: const Text('Wroclaw, Poland'),
+        actions: [
+          IconButton(
+            onPressed: () {},
+            icon: const Icon(Icons.more_vert),
+          ),
+        ],
       ),
-      body: const Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+      drawer: Drawer(
+        child: ListView(
           children: [
-            Text('Wroclove', style: TextStyle(fontSize: 32)),
-            Icon(Icons.sunny, size: 250, color: Colors.amber),
-            Text('25°C', style: TextStyle(fontSize: 32)),
-            Text('Sunny', style: TextStyle(fontSize: 32)),
+            const DrawerHeader(
+              child: Text('Drawer'),
+            ),
+            ListTile(
+              title: const Text('Item 1'),
+              onTap: () {},
+            ),
+            ListTile(
+              title: const Text('Item 2'),
+              onTap: () {},
+            ),
+          ],
+        ),
+      ),
+      drawerEdgeDragWidth: 100,
+      body: const SingleChildScrollView(
+        child: Column(
+          children: [
+            SizedBox(height: 256),
+            MainTile(),
           ],
         ),
       ),
