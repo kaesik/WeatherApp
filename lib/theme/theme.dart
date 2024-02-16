@@ -1,25 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-final colorScheme = ColorScheme.fromSeed(
-  brightness: Brightness.dark,
-  seedColor: const Color.fromARGB(255, 102, 6, 247),
-  background: const Color.fromARGB(255, 56, 49, 66),
+ThemeData lightTheme = ThemeData(
+  brightness: Brightness.light,
+  colorScheme: ColorScheme.light(
+    background: Colors.grey.shade200,
+    primary: Colors.grey.shade300,
+    secondary: Colors.grey.shade400,
+  ),
+  textTheme: GoogleFonts.josefinSansTextTheme().copyWith().apply(
+        bodyColor: Colors.grey.shade900,
+        displayColor: Colors.grey.shade900,
+      ),
 );
 
-final theme = ThemeData().copyWith(
-  useMaterial3: true,
-  scaffoldBackgroundColor: colorScheme.background,
-  colorScheme: colorScheme,
-  textTheme: GoogleFonts.ubuntuCondensedTextTheme().copyWith(
-    titleSmall: GoogleFonts.ubuntuCondensed(
-      fontWeight: FontWeight.bold,
-    ),
-    titleMedium: GoogleFonts.ubuntuCondensed(
-      fontWeight: FontWeight.bold,
-    ),
-    titleLarge: GoogleFonts.ubuntuCondensed(
-      fontWeight: FontWeight.bold,
-    ),
+ThemeData darkTheme = ThemeData(
+  brightness: Brightness.dark,
+  colorScheme: ColorScheme.dark(
+    background: Colors.grey.shade900,
+    primary: Colors.grey.shade800,
+    secondary: Colors.grey.shade700,
   ),
+  textTheme: GoogleFonts.josefinSansTextTheme().copyWith().apply(
+        bodyColor: Colors.grey.shade200,
+        displayColor: Colors.grey.shade200,
+      ),
 );
