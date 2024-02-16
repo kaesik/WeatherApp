@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:weather_app/bloc/weather_bloc.dart';
+import 'package:weather_app/widgets/weather_image.dart';
 
 class MainTile extends StatefulWidget {
   const MainTile({super.key});
@@ -12,37 +15,54 @@ class MainTile extends StatefulWidget {
 class _MainTileState extends State<MainTile> {
   @override
   Widget build(BuildContext context) {
-    return const Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Text('Loading...'),
-        Image(
-            image: AssetImage('assets/images/l-clear-d.png'),
-            width: 256,
-            height: 256),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Row(
+    return BlocBuilder<WeatherBloc, WeatherState>(
+      builder: (context, state) {
+        if (state is WeatherSuccess) {
+          return Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(Icons.arrow_drop_up, size: 32, color: Colors.red),
-                Text('25°C', style: TextStyle(fontSize: 16)),
+                Text(
+                  '${state.weather.areaName}, ${state.weather.country}',
+                  style: const TextStyle(
+                    fontSize: 48,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const WeatherImage(),
+                Text(
+                  '${state.weather.temperature!.celsius!.round()}°',
+                  style: const TextStyle(
+                    fontSize: 64,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Text(
+                  state.weather.weatherDescription.toString().toUpperCase(),
+                  style: const TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
               ],
             ),
-            Row(
-              children: [
-                Icon(Icons.arrow_drop_down, size: 32, color: Colors.blue),
-                Text('5°C', style: TextStyle(fontSize: 16)),
-              ],
+          );
+        } else if (state is WeatherLoading) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        } else if (state is WeatherFailure) {
+          return const Center(
+            child: Text(
+              'Error fetching weather',
+              style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
             ),
-          ],
-        ),
-        Text('°C', style: TextStyle(fontSize: 32)),
-        Text(
-          'Loading...',
-          style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
-        ),
-      ],
+          );
+        }
+        return const Center(
+          child: CircularProgressIndicator(),
+        );
+      },
     );
   }
 }

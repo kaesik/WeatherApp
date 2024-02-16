@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:weather_app/bloc/weather_bloc.dart';
+import 'package:weather_app/widgets/additional_tile.dart';
 import 'package:weather_app/widgets/cities_drawer.dart';
 import 'package:weather_app/widgets/main_tile.dart';
 import 'package:weather_app/widgets/settings_drawer.dart';
@@ -59,12 +60,13 @@ class _HomeScreenState extends State<HomeScreen> {
                       onPressed: () {
                         Scaffold.of(context).openDrawer();
                       },
-                      icon: const Icon(Icons.pin_drop),
+                      icon: const Icon(Icons.location_on),
                     );
                   },
                 ),
-                backgroundColor: Theme.of(context).colorScheme.background,
-                title: const Text('Wroclaw, Poland'),
+                backgroundColor: Colors.transparent,
+                shadowColor: Colors.transparent,
+                elevation: 0,
                 actions: [
                   Builder(builder: (context) {
                     return IconButton(
@@ -82,8 +84,10 @@ class _HomeScreenState extends State<HomeScreen> {
               body: const SingleChildScrollView(
                 child: Column(
                   children: [
-                    SizedBox(height: 256),
+                    SizedBox(height: 128),
                     MainTile(),
+                    SizedBox(height: 128 * 4),
+                    AdditionalTile(),
                   ],
                 ),
               ),
