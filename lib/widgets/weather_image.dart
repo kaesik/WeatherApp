@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 
 class WeatherImage extends StatelessWidget {
-  WeatherImage({
+  const WeatherImage({
     super.key,
   });
 
-  getDayTime() {
-    var hour = DateTime.now().hour;
-    if (hour >= 6 && hour < 18) {
+  getDarkLightMode() {
+    if (true) {
       return 'd';
     } else {
-      return 'n';
+      return 'l';
     }
   }
 
@@ -19,26 +18,39 @@ class WeatherImage extends StatelessWidget {
       case >= 200 && < 300:
         return 'tstorm';
       case >= 300 && < 400:
-        return '2';
+        return 'drizzle';
       case >= 500 && < 600:
-        return '3';
+        return 'rain';
       case >= 600 && < 700:
-        return '4';
+        return 'snow';
       case >= 700 && < 800:
-        return '5';
+        return 'fog';
       case == 800:
-        return '6';
+        return 'clear';
       case > 800 && <= 804:
-        return '7';
+        return 'clouds';
       default:
-        return '7';
+        return 'clear';
+    }
+  }
+
+  getDayNight() {
+    // var hour = DateTime.now().hour;
+    var hour = 19;
+    if (hour >= 6 && hour < 18) {
+      return 'd';
+    } else {
+      return 'n';
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    return const Image(
-        image: AssetImage('assets/images/l-clear-d.png'),
+    var mode = getDarkLightMode();
+    var weather = getWeatherIcon(800);
+    var dayNight = getDayNight();
+    return Image(
+        image: AssetImage('assets/images/$mode-$weather-$dayNight.png'),
         width: 256,
         height: 256);
   }
