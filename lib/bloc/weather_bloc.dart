@@ -19,8 +19,10 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
           event.position.longitude,
         );
         emit(WeatherSuccess(weather));
-      } catch (e) {
+        print('/kaesik: $weather');
+      } catch (error) {
         emit(WeatherFailure());
+        print('/kaesik: $error');
       }
     });
   }
