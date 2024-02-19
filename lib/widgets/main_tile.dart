@@ -3,20 +3,17 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather_app/bloc/weather_bloc.dart';
 import 'package:weather_app/widgets/weather_image.dart';
 
-class MainTile extends StatefulWidget {
+class MainTile extends StatelessWidget {
   const MainTile({super.key});
 
-  @override
-  State<MainTile> createState() {
-    return _MainTileState();
-  }
-}
-
-class _MainTileState extends State<MainTile> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<WeatherBloc, WeatherState>(
       builder: (context, state) {
+        if (state is WeatherInitial) {
+          print('WeatherInitial');
+        }
+
         if (state is WeatherSuccess) {
           return Center(
             child: Column(
@@ -29,7 +26,7 @@ class _MainTileState extends State<MainTile> {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                const WeatherImage(),
+                WeatherImage(),
                 Text(
                   '${state.weather.temperature!.celsius!.round()}°',
                   style: const TextStyle(
