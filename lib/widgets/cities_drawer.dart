@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:weather_app/widgets/city_card.dart';
 
 class CitiesDrawer extends StatelessWidget {
   const CitiesDrawer({super.key});
@@ -8,15 +9,9 @@ class CitiesDrawer extends StatelessWidget {
     return Drawer(
       child: ListView(
         children: const <Widget>[
-          ListTile(
-            title: Text('City 1'),
-          ),
-          ListTile(
-            title: Text('City 2'),
-          ),
-          ListTile(
-            title: Text('City 3'),
-          ),
+          CityCard(),
+          CityCard(),
+          CityCard(),
         ],
       ),
     );

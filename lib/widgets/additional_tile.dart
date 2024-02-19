@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather_app/bloc/weather_bloc.dart';
-import 'package:weather_app/widgets/weather_image.dart';
 
 class AdditionalTile extends StatefulWidget {
   const AdditionalTile({super.key});
@@ -27,7 +26,6 @@ class _AdditionalTileState extends State<AdditionalTile> {
                   style: const TextStyle(
                       fontSize: 32, fontWeight: FontWeight.bold),
                 ),
-                const WeatherImage(),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
