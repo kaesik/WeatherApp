@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:weather_app/bloc/weather_bloc.dart';
+import 'package:weather_app/bloc/weather/weather_bloc.dart';
 import 'package:weather_app/widgets/additional_tile.dart';
 import 'package:weather_app/widgets/cities_drawer.dart';
 import 'package:weather_app/widgets/main_tile.dart';

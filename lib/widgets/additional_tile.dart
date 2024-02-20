@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:weather_app/bloc/weather_bloc.dart';
+import 'package:weather_app/bloc/weather/weather_bloc.dart';
 
 class AdditionalTile extends StatefulWidget {
   const AdditionalTile({super.key});

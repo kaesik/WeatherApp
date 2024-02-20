@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:weather_app/bloc/weather_bloc.dart';
+import 'package:weather_app/bloc/weather/weather_bloc.dart';
 import 'package:weather_app/widgets/weather_image.dart';
 
 class MainTile extends StatelessWidget {
@@ -23,10 +23,9 @@ class MainTile extends StatelessWidget {
                   '${state.weather.areaName}, ${state.weather.country}',
                   style: const TextStyle(
                     fontSize: 48,
-                    fontWeight: FontWeight.bold,
                   ),
                 ),
-                WeatherImage(),
+                const WeatherImage(),
                 Text(
                   '${state.weather.temperature!.celsius!.round()}°',
                   style: const TextStyle(
@@ -38,7 +37,6 @@ class MainTile extends StatelessWidget {
                   state.weather.weatherDescription.toString().toUpperCase(),
                   style: const TextStyle(
                     fontSize: 24,
-                    fontWeight: FontWeight.bold,
                   ),
                 ),
               ],

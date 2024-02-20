@@ -24,6 +24,7 @@ dependencies:
   flutter_bloc: ^8.1.4
   equatable: ^2.0.5
   weather: ^3.1.1
+  provider: ^6.1.1
 
 dev_dependencies:
   flutter_test:
