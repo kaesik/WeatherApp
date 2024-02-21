@@ -1,17 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather_app/bloc/weather/weather_bloc.dart';
+import 'package:weather_app/widgets/additional_card.dart';
 
-class AdditionalTile extends StatefulWidget {
+class AdditionalTile extends StatelessWidget {
   const AdditionalTile({super.key});
 
-  @override
-  State<AdditionalTile> createState() {
-    return _AdditionalTileState();
-  }
-}
-
-class _AdditionalTileState extends State<AdditionalTile> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<WeatherBloc, WeatherState>(
@@ -21,48 +15,24 @@ class _AdditionalTileState extends State<AdditionalTile> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(
-                  '${state.weather.areaName}, ${state.weather.country}',
-                  style: const TextStyle(
-                      fontSize: 32, fontWeight: FontWeight.bold),
-                ),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    Text(
-                      '${state.weather.temperature!.celsius!.round()}°',
-                      style: const TextStyle(
-                          fontSize: 32, fontWeight: FontWeight.bold),
+                    AdditionalCard(
+                      icon: Icons.thermostat_outlined,
+                      title: 'Temperature',
+                      weatherState: state.weather.temperature!.celsius!
+                          .round()
+                          .toString(),
+                      sign: '°',
                     ),
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Row(
-                          children: [
-                            const Icon(Icons.arrow_drop_up,
-                                size: 24, color: Colors.red),
-                            Text('${state.weather.tempMax!.celsius!.round()}°',
-                                style: const TextStyle(fontSize: 12)),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            const Icon(Icons.arrow_drop_down,
-                                size: 24, color: Colors.blue),
-                            Text('${state.weather.tempMin!.celsius!.round()}°',
-                                style: const TextStyle(fontSize: 12)),
-                          ],
-                        ),
-                      ],
+                    AdditionalCard(
+                      icon: Icons.water,
+                      title: 'Humidity',
+                      weatherState: state.weather.humidity.toString(),
+                      sign: '%',
                     ),
                   ],
-                ),
-                Text(
-                  state.weather.weatherDescription.toString().toUpperCase(),
-                  style: const TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                  ),
                 ),
               ],
             ),

@@ -86,7 +86,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   children: [
                     SizedBox(height: 128),
                     MainTile(),
-                    SizedBox(height: 128 * 4),
+                    SizedBox(height: 128 * 3),
                     AdditionalTile(),
                   ],
                 ),
