@@ -31,16 +31,17 @@ class AdditionalCard extends StatelessWidget {
                 horizontal: 4,
                 vertical: 8,
               ),
-              child: Column(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                  Icon(icon, size: 32),
+                  SizedBox(width: 16),
+                  Column(
                     children: [
-                      Icon(icon),
                       Text(title),
+                      Text('$weatherState $sign'),
                     ],
                   ),
-                  Text('$weatherState $sign'),
                 ],
               ),
             ),

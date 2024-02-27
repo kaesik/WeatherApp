@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather_app/bloc/weather/weather_bloc.dart';
 import 'package:weather_app/widgets/additional_card.dart';
+import 'package:weather_icons/weather_icons.dart';
 
 class AdditionalTile extends StatelessWidget {
   const AdditionalTile({super.key});
@@ -19,11 +20,26 @@ class AdditionalTile extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     AdditionalCard(
+                      icon: WeatherIcons.strong_wind,
+                      title: 'Wind Speed',
+                      weatherState: state.weather.windSpeed.toString(),
+                      sign: '°',
+                    ),
+                    AdditionalCard(
+                      icon: Icons.water,
+                      title: 'Humidity',
+                      weatherState: state.weather.humidity.toString(),
+                      sign: '%',
+                    ),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    AdditionalCard(
                       icon: Icons.thermostat_outlined,
                       title: 'Temperature',
-                      weatherState: state.weather.temperature!.celsius!
-                          .round()
-                          .toString(),
+                      weatherState: state.weather.pressure.toString(),
                       sign: '°',
                     ),
                     AdditionalCard(

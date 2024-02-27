@@ -8,10 +8,14 @@ class CitiesDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Drawer(
       child: ListView(
-        children: const <Widget>[
+        children: <Widget>[
           CityCard(),
           CityCard(),
           CityCard(),
+          IconButton(
+            onPressed: () {},
+            icon: const Icon(Icons.add),
+          )
         ],
       ),
     );
