@@ -16,16 +16,23 @@ class WeatherImage extends StatelessWidget {
         if (state is WeatherSuccess) {
           return BlocBuilder<ThemeBloc, ThemeMode>(
             builder: (contextTheme, stateTheme) {
+              // print('check state: ${contextTheme.read<ThemeBloc>().state}');
               return BlocBuilder<ImageBloc, ImageState>(
                 bloc: ImageBloc()
                   ..add(FetchImage(
                     state.weather,
-                    context.read<ThemeBloc>().state == ThemeMode.dark,
+                    contextTheme.read<ThemeBloc>().state == ThemeMode.dark ||
+                        contextTheme.read<ThemeBloc>().state ==
+                            ThemeMode.system ||
+                        (MediaQuery.of(context).platformBrightness ==
+                                Brightness.dark &&
+                            contextTheme.read<ThemeBloc>().state ==
+                                ThemeMode.dark),
                   )),
                 builder: (context, state) {
                   if (state is ImageSuccess) {
                     print(
-                      '/kaesik WeatherImage: ${state.imageUrl}',
+                      '/kaesik WeathesrImage: ${state.imageUrl}',
                     );
                     return Image(
                         image: AssetImage(state.imageUrl),
