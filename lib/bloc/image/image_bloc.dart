@@ -51,7 +51,7 @@ class ImageBloc extends Bloc<ImageEvent, ImageState> {
         var dayNight = getDayNight(event.weather.date!.hour.toInt());
         var imageUrl = 'assets/images/$mode-$weather-$dayNight.png';
         emit(ImageSuccess(imageUrl));
-        print('/kaesik ImageSuccess: $imageUrl');
+        // print('/kaesik ImageSuccess: $imageUrl');
       } catch (error) {
         emit(ImageFailure());
         print('/kaesik ImageFailure: $error');

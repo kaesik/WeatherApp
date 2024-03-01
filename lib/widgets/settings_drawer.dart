@@ -35,7 +35,7 @@ class _SettingsDrawerState extends State<SettingsDrawer> {
                   onChanged: (value) {
                     setState(() {
                       context.read<ThemeBloc>().add(ThemeChanged(value));
-                      print('Dark Mode: $value');
+                      // print('Dark Mode: $value');
                     });
                   },
                 ),

@@ -31,9 +31,7 @@ class WeatherImage extends StatelessWidget {
                   )),
                 builder: (context, state) {
                   if (state is ImageSuccess) {
-                    print(
-                      '/kaesik WeathesrImage: ${state.imageUrl}',
-                    );
+                    // print('/kaesik WeathesrImage: ${state.imageUrl}');
                     return Image(
                         image: AssetImage(state.imageUrl),
                         width: 256,
