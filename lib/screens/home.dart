@@ -48,8 +48,9 @@ class _HomeScreenState extends State<HomeScreen> {
       builder: (context, snap) {
         if (snap.hasData) {
           return BlocProvider<WeatherBloc>(
-            create: (context) =>
-                WeatherBloc()..add(FetchWeather(snap.data as Position)),
+            create: (context) {
+              return WeatherBloc()..add(FetchWeather(snap.data as Position));
+            },
             child: Scaffold(
               backgroundColor: Theme.of(context).colorScheme.background,
               extendBodyBehindAppBar: true,

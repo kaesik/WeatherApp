@@ -1,22 +1,33 @@
 import 'package:flutter/material.dart';
+import 'package:weather_app/models/city.dart';
 
-class CityCard extends StatefulWidget {
-  const CityCard({super.key});
+class CityCard extends StatelessWidget {
+  final City city;
+  const CityCard({
+    super.key,
+    required this.city,
+  });
 
-  @override
-  State<CityCard> createState() {
-    return _CityCardState();
-  }
-}
-
-class _CityCardState extends State<CityCard> {
   @override
   Widget build(BuildContext context) {
-    return const Card(
-        child: ListTile(
-      title: Text('City Name'),
-      subtitle: Text('Country Name'),
-      trailing: Icon(Icons.more_vert),
-    ));
+    return Card(
+      child: ListTile(
+        title: Text(city.name),
+        subtitle: Text(city.country),
+        trailing: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            IconButton(
+              onPressed: () {},
+              icon: const Icon(Icons.more_vert),
+            ),
+            IconButton(
+              onPressed: () {},
+              icon: const Icon(Icons.delete),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }

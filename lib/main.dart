@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:weather_app/bloc/city/city_bloc.dart';
 import 'package:weather_app/bloc/theme/theme_bloc.dart';
 import 'package:weather_app/screens/home.dart';
 import 'package:weather_app/theme/theme.dart';
@@ -13,10 +14,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => ThemeBloc(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (contextTheme) => ThemeBloc()),
+        BlocProvider(create: (contextCity) => CityBloc()),
+      ],
       child: BlocBuilder<ThemeBloc, ThemeMode>(
-        builder: (context, state) {
+        builder: (contextTheme, state) {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
             theme: lightTheme,
