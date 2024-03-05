@@ -1,14 +1,21 @@
-part of 'city_bloc.dart';
+part of 'city_cubit.dart';
 
-abstract class CityState {
-  List<City> cities;
-  CityState({required this.cities});
+abstract class CityState extends Equatable {
+  const CityState();
+
+  @override
+  List<Object> get props => [];
 }
 
-class CityInitial extends CityState {
-  CityInitial({required super.cities});
+class InitCityState extends CityState {
+  final int counter;
+
+  const InitCityState(this.counter);
+
+  @override
+  List<Object> get props => [counter];
 }
 
-class CityUpdated extends CityState {
-  CityUpdated({required super.cities});
-}
+class AddCityState extends CityState {}
+
+class RemoveCityState extends CityState {}
