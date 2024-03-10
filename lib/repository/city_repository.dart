@@ -5,9 +5,9 @@ class CityRepository {
   Future<List<City>> getCities({
     required Database database,
   }) async {
-    final datas = await database.rawQuery('SELECT * FROM cities');
+    final data = await database.rawQuery('SELECT * FROM cities');
     List<City> todos = [];
-    for (var item in datas) {
+    for (var item in data) {
       todos.add(
         City(
           id: item['id'] as String,
@@ -25,10 +25,18 @@ class CityRepository {
 
   Future<dynamic> addCity({
     required Database database,
-    required String text,
+    required String name,
+    required String country,
+    required double latitude,
+    required double longitude,
   }) async {
     return await database.transaction((txn) async {
-      await txn.rawInsert("INSERT INTO cities (name) VALUES ('$text')");
+      await txn.rawInsert('''INSERT INTO cities
+      (name) VALUES ('$name')
+      (country) VALUES ('$country')
+      (latitude) VALUES ('$latitude')
+      (longitude) VALUES ('$longitude')
+      ''');
     });
   }
 

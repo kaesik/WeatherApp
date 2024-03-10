@@ -20,7 +20,8 @@ class DatabaseCubit extends Cubit<DatabaseState> {
       database = await openDatabase(path, version: 1,
           onCreate: (Database db, int version) async {
         // When creating the db, create the table
-        await db.execute('''CREATE TABLE cities (
+        await db.execute('''
+            CREATE TABLE cities (
             id INTEGER PRIMARY KEY, 
             name TEXT, 
             country TEXT, 
@@ -35,7 +36,8 @@ class DatabaseCubit extends Cubit<DatabaseState> {
         database = await openDatabase(path, version: 1,
             onCreate: (Database db, int version) async {
           // When creating the db, create the table
-          await db.execute('''CREATE TABLE cities (
+          await db.execute('''
+              CREATE TABLE cities (
               id INTEGER PRIMARY KEY, 
               name TEXT, 
               country TEXT, 

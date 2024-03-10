@@ -26,9 +26,20 @@ class CityCubit extends Cubit<CityState> {
     }
   }
 
-  Future<void> addCities(String text) async {
+  Future<void> addCities(
+    String name,
+    String country,
+    double latitude,
+    double longitude,
+  ) async {
     try {
-      await _cityRepo.addCity(database: database, text: text);
+      await _cityRepo.addCity(
+        database: database,
+        name: name,
+        country: country,
+        latitude: latitude,
+        longitude: longitude,
+      );
       emit(InitCityState(_counter++));
       getCities();
     } catch (e) {
@@ -38,7 +49,10 @@ class CityCubit extends Cubit<CityState> {
 
   Future<void> removeCity(int id) async {
     try {
-      await _cityRepo.removeCity(database: database, id: id);
+      await _cityRepo.removeCity(
+        database: database,
+        id: id,
+      );
       emit(InitCityState(_counter++));
       getCities();
     } catch (e) {
