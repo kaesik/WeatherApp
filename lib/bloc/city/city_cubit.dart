@@ -2,61 +2,73 @@ import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:sqflite/sqlite_api.dart';
+import 'package:sqflite/sqflite.dart';
+import 'package:weather_app/bloc/database/database_cubit.dart';
 import 'package:weather_app/models/city.dart';
 import 'package:weather_app/repository/city_repository.dart';
 
 part 'city_state.dart';
 
 class CityCubit extends Cubit<CityState> {
-  final _cityRepo = CityRepository();
-  final Database database;
-  CityCubit({required this.database}) : super(const InitCityState(0));
+  final CityRepository _cityRepo = CityRepository();
+  final Database? database;
+  final DatabaseCubit databaseCubit;
 
-  int _counter = 1;
-  List<City> _cities = [];
-  List<City> get cities => _cities;
+  CityCubit({
+    required this.database,
+    required this.databaseCubit,
+  }) : super(CityInitial());
 
   Future<void> getCities() async {
     try {
-      _cities = await _cityRepo.getCities(database: database);
-      emit(InitCityState(_counter++));
+      final cities =
+          await _cityRepo.getCities(database: databaseCubit.database!);
+      emit(CityLoadSuccess(cities));
     } catch (e) {
-      log(e.toString());
+      log('Error getting cities: $e');
+      emit(CityLoadFailure());
     }
   }
 
-  Future<void> addCities(
+  Future<void> addCity(
     String name,
     String country,
     double latitude,
     double longitude,
   ) async {
     try {
-      await _cityRepo.addCity(
-        database: database,
+      final newCity = City(
         name: name,
         country: country,
-        latitude: latitude,
-        longitude: longitude,
+        location: CityLocation(latitude: latitude, longitude: longitude),
       );
-      emit(InitCityState(_counter++));
-      getCities();
+
+      await _cityRepo.addCity(
+        database: databaseCubit.database!,
+        name: newCity.name,
+        country: newCity.country,
+        latitude: newCity.location.latitude,
+        longitude: newCity.location.longitude,
+      );
+
+      emit(CityLoadSuccess(
+          await _cityRepo.getCities(database: databaseCubit.database!)));
     } catch (e) {
       log(e.toString());
+      emit(CityLoadFailure());
     }
   }
 
   Future<void> removeCity(int id) async {
     try {
       await _cityRepo.removeCity(
-        database: database,
+        database: databaseCubit.database!,
         id: id,
       );
-      emit(InitCityState(_counter++));
-      getCities();
+
+      getCities(); // Instead of emitting InitCityState, trigger a load
     } catch (e) {
-      log(e.toString());
+      log('Error removing city: $e');
     }
   }
 }

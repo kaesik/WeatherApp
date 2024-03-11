@@ -6,9 +6,9 @@ class CityRepository {
     required Database database,
   }) async {
     final data = await database.rawQuery('SELECT * FROM cities');
-    List<City> todos = [];
+    List<City> cities = [];
     for (var item in data) {
-      todos.add(
+      cities.add(
         City(
           id: item['id'] as String,
           name: item['name'] as String,
@@ -20,7 +20,7 @@ class CityRepository {
         ),
       );
     }
-    return todos;
+    return cities;
   }
 
   Future<dynamic> addCity({
@@ -31,12 +31,11 @@ class CityRepository {
     required double longitude,
   }) async {
     return await database.transaction((txn) async {
-      await txn.rawInsert('''INSERT INTO cities
-      (name) VALUES ('$name')
-      (country) VALUES ('$country')
-      (latitude) VALUES ('$latitude')
-      (longitude) VALUES ('$longitude')
-      ''');
+      await txn.rawInsert('''
+      INSERT INTO cities
+      (name, country, latitude, longitude)
+      VALUES ('$name', '$country', $latitude, $longitude)
+    ''');
     });
   }
 
