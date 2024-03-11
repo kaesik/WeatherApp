@@ -17,15 +17,18 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  // Function to determine the current device location
   Future<Position> _determinePosition() async {
     bool serviceEnabled;
     LocationPermission permission;
 
+    // Check if location services are enabled
     serviceEnabled = await Geolocator.isLocationServiceEnabled();
     if (!serviceEnabled) {
       return Future.error('Location services are disabled.');
     }
 
+    // Check location permissions
     permission = await Geolocator.checkPermission();
     if (permission == LocationPermission.denied) {
       permission = await Geolocator.requestPermission();
@@ -34,10 +37,13 @@ class _HomeScreenState extends State<HomeScreen> {
       }
     }
 
+    // Handle permanently denied location permissions
     if (permission == LocationPermission.deniedForever) {
       return Future.error(
           'Location permissions are permanently denied, we cannot request permissions.');
     }
+
+    // Get the current device position
     return await Geolocator.getCurrentPosition();
   }
 
@@ -48,6 +54,7 @@ class _HomeScreenState extends State<HomeScreen> {
       builder: (context, snap) {
         if (snap.hasData) {
           return BlocProvider<WeatherBloc>(
+            // Create a WeatherBloc and fetch weather based on the device location
             create: (context) {
               return WeatherBloc()..add(FetchWeather(snap.data as Position));
             },
@@ -95,6 +102,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           );
         } else {
+          // Show a loading indicator while determining the device location
           return const Scaffold(
             body: Center(
               child: CircularProgressIndicator(),
