@@ -4,18 +4,18 @@ abstract class CityState extends Equatable {
   const CityState();
 
   @override
-  List<Object> get props => [];
+  List<Object?> get props => [];
 }
 
-class InitCityState extends CityState {
-  final int counter;
+class CityInitial extends CityState {}
 
-  const InitCityState(this.counter);
+class CityLoadSuccess extends CityState {
+  final List<City> cities;
+
+  const CityLoadSuccess(this.cities);
 
   @override
-  List<Object> get props => [counter];
+  List<Object?> get props => [cities];
 }
 
-class AddCityState extends CityState {}
-
-class RemoveCityState extends CityState {}
+class CityLoadFailure extends CityState {}
